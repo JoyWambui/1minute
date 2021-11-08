@@ -1,13 +1,12 @@
 class Config:
     """General configuration parent class"""
-    pass
+    SQLALCHEMY_DATABASE_URI ='postgresql+psycopg2://bobo:Riptide@localhost/one_minute'
 
 
 
 class ProdConfig(Config):
     """Production  configuration child class"""
-
-    SQLALCHEMY_DATABASE_URI ='postgresql+psycopg2://bobo:Riptide@localhost/one_minute'
+    pass
 
 
 class DevConfig(Config):
