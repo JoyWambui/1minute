@@ -28,6 +28,9 @@ class User(UserMixin,db.Model):
     def password_verification(self,password):
         """Method that checks whether a hashed password and user password that it hashes match."""
         return check_password_hash(self.user_password,password)
+    
+    def get_user_id(self):
+        return self.id
 
     def __repr__(self):
         return f'User {self.username}'
@@ -46,3 +49,17 @@ class Pitch(db.Model):
     time_posted = db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     
+    def save_pitch(self):
+        db.session.add(self)
+        db.session.commit()
+        
+    @classmethod
+    def get_user_pitches(cls,id):
+        """Returns all a user's pitches."""
+        user_pitches = Pitch.query.filter_by(user_id=id).all()
+        return user_pitches
+    @classmethod
+    def get_all_pitches(cls):
+        """Returns all pitches."""
+        pitches = Pitch.query.all()
+        return pitches   
