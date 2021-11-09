@@ -1,0 +1,4 @@
+Hello {{new_user.username}}
+Welcome to 1Minute Pitch!
+Thank you for signing up to our application and welcome to the family. Interact with all the features our app has to offer from creating pitches and leaving feedback for posted pitches and much more.
+Enjoy!

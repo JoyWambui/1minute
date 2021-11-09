@@ -11,12 +11,12 @@ class RegistrationForm(FlaskForm):
     user_password_confirm = PasswordField('Confirm New Password',validators = [Required()])
     submit_details = SubmitField('Sign Up')
     
-    def email_validation(self,data_field):
+    def validate_user_email(self,data_field):
         """Checks if an input email is already registered with an acoount."""
         if User.query.filter_by(email = data_field.data).first():
             raise ValidationError("This email is registered to an account.")
 
-    def username_validation(self,data_field):
+    def validate_username(self,data_field):
         "Checks if a chosen username already exists in the application."
         if User.query.filter_by(username = data_field.data).first():
             raise ValidationError("This username exists. Choose another one.")
