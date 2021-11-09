@@ -1,5 +1,6 @@
 import unittest
 from app.models import User
+from app import db
 
 class UserModelTest(unittest.TestCase):
 
@@ -10,6 +11,7 @@ class UserModelTest(unittest.TestCase):
     def tearDown(self):
         """Deletes all user elements frrom the database after every test."""
         User.query.delete()
+        db.session.commit()
         
     def test_user_variables(self):
         """Checks if the user variables are correctly placed."""

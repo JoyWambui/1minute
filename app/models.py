@@ -48,6 +48,7 @@ class Pitch(db.Model):
     user_pitch = db.Column(db.String(200))
     time_posted = db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+    category_id = db.Column(db.Integer,db.ForeignKey("categories.id"))
     
     def save_pitch(self):
         db.session.add(self)
@@ -62,4 +63,12 @@ class Pitch(db.Model):
     def get_all_pitches(cls):
         """Returns all pitches."""
         pitches = Pitch.query.all()
-        return pitches   
+        return pitches  
+    
+class Category(db.Model):
+    """Creates caetogry instances and defines category methods.""" 
+    __tablename__="categories"
+    id = db.Column(db.Integer,primary_key = True)
+    name = db.Column(db.String(255))
+    pitches = db.relationship("Pitch",backref="category",lazy="dynamic")
+
