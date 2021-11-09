@@ -1,11 +1,16 @@
+from enum import unique
+from operator import index
 from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
+from flask_login import UserMixin
+from . import login_manager
 
-class User(db.Model):
+class User(UserMixin,db.Model):
     """Class that defines a User Model and helps us create new users."""
     __tablename__ = "users"
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
+    email = db.Column(db.String(255),unique=True,index=True)
     user_password = db.Column(db.String(255))
     
     @property
@@ -25,6 +30,12 @@ class User(db.Model):
 
     def __repr__(self):
         return f'User {self.username}'
+    
+@login_manager.user_loader
+def loads_user(user_id):
+    """Method that queries the datbase and gets a user with the passed id."""
+    return User.query.get(int(user_id))    
+
     
 
     

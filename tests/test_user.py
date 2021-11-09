@@ -6,15 +6,16 @@ class UserModelTest(unittest.TestCase):
 
     def setUp(self):
         """Creates a new instance of the USer model."""
-        self.new_user = User(username="reagan",password="cognito")
+        self.new_user = User(username="reagan",email="123@gmail.com",password="cognito")
         
     def tearDown(self):
         """Deletes all user elements frrom the database after every test."""
         User.query.delete()
         
-    def check_user_variables(self):
+    def test_user_variables(self):
         """Checks if the user variables are correctly placed."""
         self.assertEquals(self.new_user.username,"reagan")
+        self.assertEquals(self.new_user.email,"123@gmail.com")
         
 
     def test_sets_password(self):
