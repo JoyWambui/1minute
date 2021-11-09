@@ -12,10 +12,10 @@ def register():
     
     registration_form = RegistrationForm()
     if registration_form.validate_on_submit():
-        new_user = User(email = registration_form.email.data, username = registration_form.username.data,password = registration_form.password.data)
+        new_user = User(username = registration_form.username.data,email = registration_form.user_email.data,password = registration_form.user_password.data)
         db.session.add(new_user)
         db.session.commit()
-        return redirect(url_for('authentication.login'))
+        return redirect(url_for("authentication.login"))
     title="New Account"
     return render_template('auth/registration.html',registration_form = registration_form,title=title)
 
@@ -25,8 +25,8 @@ def login():
 
     login_form = LoginForm()
     if login_form.validate_on_submit():
-        existing_user = User.query.filter_by(email = login_form.email.data).first()
-        if existing_user is not None and existing_user.password_verification(login_form.password.data):
+        existing_user = User.query.filter_by(email = login_form.login_email.data).first()
+        if existing_user is not None and existing_user.password_verification(login_form.login_password.data):
             login_user(existing_user,login_form.remember_me.data)
             return redirect(request.args.get("next") or url_for("main.index"))
 
