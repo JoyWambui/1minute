@@ -1,4 +1,3 @@
-from operator import is_not
 import unittest
 from app.models import User
 

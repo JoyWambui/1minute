@@ -1,9 +1,9 @@
-from enum import unique
-from operator import index
+from sqlalchemy.orm import backref, lazyload
 from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from . import login_manager
+from datetime import datetime
 
 class User(UserMixin,db.Model):
     """Class that defines a User Model and helps us create new users."""
@@ -12,6 +12,7 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(255))
     email = db.Column(db.String(255),unique=True,index=True)
     user_password = db.Column(db.String(255))
+    pitches = db.relationship("Pitch",backref="user",lazy="dynamic")
     
     @property
     def password(self):
@@ -34,8 +35,14 @@ class User(UserMixin,db.Model):
 @login_manager.user_loader
 def loads_user(user_id):
     """Method that queries the datbase and gets a user with the passed id."""
-    return User.query.get(int(user_id))    
+    return User.query.get(int(user_id))  
 
-    
-
+class Pitch(db.Model):
+    """Class that defines a Pitch Model and creates new pitches."""
+    __tablename__ = "pitches"
+    id = id = db.Column(db.Integer,primary_key = True)
+    # pitch_category
+    user_pitch = db.Column(db.String(200))
+    time_posted = db.Column(db.DateTime,default=datetime.utcnow)
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     
