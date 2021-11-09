@@ -14,16 +14,15 @@ class Config:
 class ProdConfig(Config):
     """Production  configuration child class."""
     pass
+class TestConfig(Config):
+    """Database test configuration child class."""
+    SQLALCHEMY_DATABASE_URI="postgresql+psycopg2://bobo:Riptide@localhost/one_minute_test"
 
 class DevConfig(Config):
     """Development  configuration child class."""
     SQLALCHEMY_DATABASE_URI="postgresql+psycopg2://bobo:Riptide@localhost/one_minute"
 
     DEBUG = True
-
-class TestConfig(Config):
-    """Database test configuration child class."""
-    SQLALCHEMY_DATABASE_URI="postgresql+psycopg2://bobo:Riptide@localhost/one_minute"
     
 config_options = {
 "development":DevConfig,

@@ -66,7 +66,7 @@ class Pitch(db.Model):
         return pitches  
     
 class Category(db.Model):
-    """Creates caetogry instances and defines category methods.""" 
+    """Creates category instances and defines category methods.""" 
     __tablename__="categories"
     id = db.Column(db.Integer,primary_key = True)
     name = db.Column(db.String(255))
