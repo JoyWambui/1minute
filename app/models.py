@@ -1,3 +1,4 @@
+import re
 from sqlalchemy.orm import backref, lazyload
 from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
@@ -46,7 +47,7 @@ class Pitch(db.Model):
     id = id = db.Column(db.Integer,primary_key = True)
     # pitch_category
     user_pitch = db.Column(db.String(200))
-    time_posted = db.Column(db.DateTime,default=datetime.utcnow)
+    time_posted = db.Column(db.DateTime,default=datetime.now)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     category_id = db.Column(db.Integer,db.ForeignKey("categories.id"))
     
@@ -64,6 +65,7 @@ class Pitch(db.Model):
         """Returns all pitches."""
         pitches = Pitch.query.all()
         return pitches  
+
     
 class Category(db.Model):
     """Creates category instances and defines category methods.""" 
@@ -80,4 +82,5 @@ class Category(db.Model):
     def get_categories(cls):
         """Returns all categories."""
         categories = Category.query.all()
-        return categories  
+        return categories 
+    

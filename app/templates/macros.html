@@ -6,11 +6,30 @@
                 <div class="card text-center">
                     <div class="card-body">
                         <h5 class="card-title">{{category.name|title}}</h5>
-                        <a href="#" class="btn btn-primary">Create Pitch</a>
+                        <a href="/categories/pitch/new/{{category.name}}" class="btn btn-primary">Create Pitch</a>
                     </div>
                 </div>            
             </div>
             <div class="col-md-2"></div>
+        </div>
+    {% endfor %}
+{% endmacro %}
+{% macro displayPitches(pitches_list) %}
+    {% for pitch in pitches_list%}
+        <div class="row">
+            <div class="col-md-1 "></div>
+            <div class="col-md-10 ">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h2>Pitch: </h2>
+                        <h3>{{pitch.user_pitch}}</h3>
+                        <h2>Submitted at: </h2>
+                        <h3>{{pitch.time_posted}}</h3>
+                        <a href="#" class="btn btn-primary">Add Comment</a>
+                    </div>
+                </div>            
+            </div>
+            <div class="col-md-1"></div>
         </div>
     {% endfor %}
 {% endmacro %}

@@ -1,19 +1,15 @@
 {% extends 'base.html'%}
+{% import 'macros.html' as macro%}
 
 {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <h3>Name: {{user.username| capitalize}} </h3>
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <h1 style="text-align: center;">{{user.username|capitalize}}'s PROFILE PAGE</h1><br>
+            {{macro.displayPitches(user_pitches)}}
         </div>
-        <!--Displaying user bio
-        {% if user.bio %}
-            <p> {{user.bio}}</p>
-        {%else%}
-            <p> {{user.username| capitalize}} has no bio </p>
-        {% endif %}-->
-        <div class="col-md-4">
+        <div class="col-md-1">
             <!--Display profile photo
             {% if user.profile_pic_path %}
             <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
