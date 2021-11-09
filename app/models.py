@@ -72,3 +72,12 @@ class Category(db.Model):
     name = db.Column(db.String(255))
     pitches = db.relationship("Pitch",backref="category",lazy="dynamic")
 
+    def save_category(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    @classmethod
+    def get_categories(cls):
+        """Returns all categories."""
+        categories = Category.query.all()
+        return categories  

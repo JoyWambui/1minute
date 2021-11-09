@@ -1,24 +1,27 @@
 import unittest
-from app.models import Pitch,User
+from app.models import Pitch,User,Category
 from app import db
 
 class TestPitch(unittest.TestCase):
     def setUp(self):
         """Creates a new instance of the Pitch and User model."""
         self.new_user = User(username="reagan",email="123@gmail.com",password="cognito")
-        self.new_pitch = Pitch(user_pitch="hello my name is reagan",user=self.new_user)
+        self.new_category = Category(name="interview pitch")
+        self.new_pitch = Pitch(user_pitch="hello my name is reagan",user=self.new_user,category=self.new_category)
         
     def tearDown(self):
         """Deletes all user and pitch elements from the database after every test."""
         Pitch.query.delete()
         User.query.delete()
+        Category.query.delete()
         db.session.commit()
         
     def test_pitch_variables(self):
         """Checks if the pitch variables are correctly placed."""
         self.assertEquals(self.new_pitch.user_pitch,"hello my name is reagan")
         self.assertEquals(self.new_pitch.user_id,self.new_user.id)
-        
+        self.assertEquals(self.new_pitch.category_id,self.new_category.id)
+
     def test_save_pitch(self):
         """Checks if the pitch is being saved."""
         self.new_pitch.save_pitch()
