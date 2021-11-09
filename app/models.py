@@ -50,6 +50,8 @@ class Pitch(db.Model):
     time_posted = db.Column(db.DateTime,default=datetime.now)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     category_id = db.Column(db.Integer,db.ForeignKey("categories.id"))
+    comments = db.relationship("Comment",backref="pitch",lazy="dynamic")
+
     
     def save_pitch(self):
         db.session.add(self)
@@ -83,4 +85,14 @@ class Category(db.Model):
         """Returns all categories."""
         categories = Category.query.all()
         return categories 
+    
+class Comment(db.Model):
+    """Class that defines a Pitch Model and creates new pitches."""
+    __tablename__ = "comments"
+    id = id = db.Column(db.Integer,primary_key = True)
+    comment = db.Column(db.String(255))
+    time_posted = db.Column(db.DateTime,default=datetime.now)
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+    pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"))
+
     
