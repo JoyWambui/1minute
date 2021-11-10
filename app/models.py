@@ -94,5 +94,16 @@ class Comment(db.Model):
     time_posted = db.Column(db.DateTime,default=datetime.now)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"))
+    
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+        
+    @classmethod
+    def get_pitch_comments(cls,id):
+        """Returns all a pitch's comments."""
+        pitch_comments = Comment.query.filter_by(pitch_id=id).all()
+        return pitch_comments
+
 
     
