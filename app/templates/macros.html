@@ -22,10 +22,10 @@
                 <div class="card text-center">
                     <div class="card-body">
                         <h2>Pitch: </h2>
-                        <h3>{{pitch.user_pitch}}</h3>
+                        <h3>{{pitch.user_pitch|truncate}}</h3>
                         <h2>Submitted at: </h2>
                         <h3>{{pitch.time_posted}}</h3>
-                        <a href="#" class="btn btn-primary">Add Comment</a>
+                        <a href="{{url_for('main.single_pitch',id=pitch.id)}}" class="btn btn-primary">View Pitch</a>
                     </div>
                 </div>            
             </div>

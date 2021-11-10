@@ -3,9 +3,7 @@ from . import main
 from ..models import User,Category,Pitch
 from flask_login import login_required,current_user
 from .forms import PitchForm
-#@main.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
-#@login_required
-#def new_comment(id):
+import markdown2
 
 @main.route("/")
 def index():
@@ -48,3 +46,11 @@ def new_pitch(name):
 
     title = "New Pitch"
     return render_template('new_pitch.html',title = title, pitch_form=pitch_form, category=category)
+
+@main.route("/pitch/<int:id>")
+def single_pitch(id):
+    pitch=Pitch.query.get(id)
+    if pitch is None:
+        abort(404)
+    format_pitch = markdown2.markdown(pitch.user_pitch,extras=["code-friendly", "fenced-code-blocks"])
+    return render_template('pitch.html',pitch=pitch,format_pitch=format_pitch)
