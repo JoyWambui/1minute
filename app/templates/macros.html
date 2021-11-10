@@ -33,3 +33,24 @@
         </div>
     {% endfor %}
 {% endmacro %}
+{% macro displayComments(comments_list) %}
+    {% for comment in comments_list%}
+        <div class="row">
+            <div class="col-md-1 "></div>
+            <div class="col-md-10 ">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h2>Author: </h2>
+                        <h3>{{comment.author}}</h3>
+                        <h2>Comment: </h2>
+                        <h3>{{comment.comment}}</h3>
+                        <h2>Submitted at: </h2>
+                        <h3>{{comment.time_posted}}</h3>
+                    </div>
+                </div>            
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    {% endfor %}
+{% endmacro %}
+

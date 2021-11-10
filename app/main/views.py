@@ -50,10 +50,11 @@ def new_pitch(name):
 @main.route("/pitch/<int:id>")
 def single_pitch(id):
     pitch=Pitch.query.get(id)
+    comments = Comment.get_pitch_comments(pitch.id)
     if pitch is None:
         abort(404)
     format_pitch = markdown2.markdown(pitch.user_pitch,extras=["code-friendly", "fenced-code-blocks"])
-    return render_template('pitch.html',pitch=pitch,format_pitch=format_pitch)
+    return render_template('pitch.html',pitch=pitch,format_pitch=format_pitch,comments=comments)
 
 @main.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
 @login_required
@@ -63,9 +64,9 @@ def new_comment(id):
     pitch = Pitch.query.get(id)
 
     if comment_form.validate_on_submit():
-        title = comment_form.title.data
-        comment = comment_form.pitch.data
-        new_comment = Comment(comment=comment,user=current_user)
+        author = comment_form.author.data
+        pitch_comment = comment_form.pitch.data
+        new_comment = Comment(author=author,comment=pitch_comment,user=current_user,pitch_id=pitch.id)
         new_comment.save_comment()
         return redirect(url_for('.single_pitch',id=pitch.id))
 

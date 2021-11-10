@@ -10,7 +10,7 @@ class PitchForm(FlaskForm):
     
 class CommentForm(FlaskForm):
 
-    title = StringField('Input Comment title',validators=[Required()])
+    author = StringField('Input Name',validators=[Required()])
     pitch = TextAreaField('Add a Comment: ')
     submit = SubmitField('Submit Comment')
 

@@ -1,4 +1,5 @@
 {% extends 'base.html'%}
+{% import 'macros.html' as macro%}
 
 {% block content%}
 <div class="row">
@@ -15,4 +16,16 @@
         </div>            
     </div>
     <div class="col-md-1"></div>
-</div>{%endblock%}
+    <div class="row">
+        <hr>
+        <h1>Comments: </h1>
+        <hr>
+        {% if comments %}
+            {{macro.displayComments(comments)}}
+        {% else%}
+            <h1 class="text-center">This Pitch has no comments!</h3>
+        {% endif %}
+    </div>
+
+</div>
+{%endblock%}

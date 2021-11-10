@@ -90,6 +90,7 @@ class Comment(db.Model):
     """Class that defines a Pitch Model and creates new pitches."""
     __tablename__ = "comments"
     id = id = db.Column(db.Integer,primary_key = True)
+    author=db.Column(db.String(100))
     comment = db.Column(db.String)
     time_posted = db.Column(db.DateTime,default=datetime.now)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
@@ -104,6 +105,7 @@ class Comment(db.Model):
         """Returns all a pitch's comments."""
         pitch_comments = Comment.query.filter_by(pitch_id=id).all()
         return pitch_comments
+    
 
 
     
