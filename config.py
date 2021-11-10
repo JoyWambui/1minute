@@ -13,7 +13,7 @@ class Config:
 
 class ProdConfig(Config):
     """Production  configuration child class."""
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    SQLALCHEMY_DATABASE_URI = "postgres://rnddqlqvyzcjva:be4d83b2e0fcf55df74b5bc9e5108ca187f98623d9e1c358caeef7f9a11a8129@ec2-3-227-149-67.compute-1.amazonaws.com:5432/d777gb4fitnjb0"
     if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://","postgresql://",1)
 class TestConfig(Config):
