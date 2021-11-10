@@ -1,0 +1,61 @@
+.main-link-btn{
+    background-color: #32CD32;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 2em;
+    border-radius: 25px;
+    margin: 0 25px;
+}
+.main-link-btn:hover {
+    background-color:white;
+    border: 1px solid #32CD32;
+    text-decoration: none;
+}
+.btn{
+    text-align: center;
+    margin: 0 40%;
+}
+.link-btn{
+    background-color: lightseagreen;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 1.5em;
+    border-radius: 25px;
+}
+.link-btn:hover {
+    background-color:white;
+    border: 1px solid lightseagreen;
+    text-decoration: none;
+}
+.card-btn{
+    margin-top: 1%;
+}
+
+.card{
+    margin: 4% 0;
+    border-radius: 10px;
+    box-shadow: 0 -5px 3px -3px black, 0 5px 3px -3px;
+    width: 100%;
+    padding: 5%;
+}
+h1{
+    font-size: 7em;
+    font-weight: bolder;
+    text-align: center;
+}
+
+h2{
+    font-size: 2.5em;
+    text-align: center;
+    text-decoration: underline;
+
+}
+h3{
+    font-size: 2em;
+}
+
+.link{
+    text-align: center;
+}

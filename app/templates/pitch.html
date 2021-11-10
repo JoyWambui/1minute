@@ -1,18 +1,19 @@
 {% extends 'base.html'%}
 {% import 'macros.html' as macro%}
-
+{% block styles%}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/pitch.css')}}">
+{% endblock %}
 {% block content%}
 <div class="row">
     <div class="col-md-1 "></div>
     <div class="col-md-10 ">
         <div class="card text-center">
-            <div class="card-body">
-                <h2>Pitch: </h2>
-                <h3>{{format_pitch|safe}}</h3>
-                <h2>Submitted at: </h2>
-                <h3>{{pitch.time_posted}}</h3>
-                <a href="/pitch/comment/new/{{pitch.id}}" class="btn btn-primary">Add Comment</a>
-            </div>
+            <h2>Pitch: </h2>
+            <h3>{{format_pitch|safe}}</h3>
+            <h2>Submitted at: </h2>
+            <h3>{{pitch.time_posted}}</h3>
+            <a href="/pitch/comment/new/{{pitch.id}}" class="link-btn">Add Comment</a>
         </div>            
     </div>
     <div class="col-md-1"></div>
@@ -21,7 +22,24 @@
         <h1>Comments: </h1>
         <hr>
         {% if comments %}
-            {{macro.displayComments(comments)}}
+            {% for comment in comments%}
+            <div class="row">
+                <div class="col-md-1 "></div>
+                <div class="col-md-10 ">
+                    <div class="card text-center" id="comment">
+                        <div class="card-body">
+                            <h2>Author: </h2>
+                            <h3>{{comment.author}}</h3>
+                            <h2>Comment: </h2>
+                            <h3>{{comment.comment}}</h3>
+                            <h2>Submitted at: </h2>
+                            <h3>{{comment.time_posted}}</h3>
+                        </div>
+                    </div>            
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+            {% endfor %}        
         {% else%}
             <h1 class="text-center">This Pitch has no comments!</h3>
         {% endif %}

@@ -45,7 +45,6 @@ class Pitch(db.Model):
     """Class that defines a Pitch Model and creates new pitches."""
     __tablename__ = "pitches"
     id = id = db.Column(db.Integer,primary_key = True)
-    # pitch_category
     user_pitch = db.Column(db.String(800))
     time_posted = db.Column(db.DateTime,default=datetime.now)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))

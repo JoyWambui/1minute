@@ -9,8 +9,9 @@ import markdown2
 def index():
     """View root page function that returns the index page and its data"""
     pitches = Pitch.get_all_pitches()
+    name= PitchForm.name
     title="1Minute App"
-    return render_template("index.html",title=title,pitches=pitches)
+    return render_template("index.html",title=title,pitches=pitches,name=name)
 
 @main.route('/user/<username>')
 def my_profile(username):
@@ -38,14 +39,14 @@ def new_pitch(name):
     category = Category
 
     if pitch_form.validate_on_submit():
-        title = pitch_form.title.data
+        name = pitch_form.name.data
         pitch = pitch_form.pitch.data
         new_pitch = Pitch(user_pitch=pitch,user=current_user)
         new_pitch.save_pitch()
         return redirect(url_for('.index'))
 
     title = "New Pitch"
-    return render_template('new_pitch.html',title = title, pitch_form=pitch_form, category=category)
+    return render_template('new_pitch.html',title = title, pitch_form=pitch_form,name=name, category=category)
 
 @main.route("/pitch/<int:id>")
 def single_pitch(id):
