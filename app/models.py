@@ -14,7 +14,7 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(255),unique=True,index=True)
     user_password = db.Column(db.String(255))
     pitches = db.relationship("Pitch",backref="user",lazy="dynamic")
-    
+    comments = db.relationship("Comment", backref="user",lazy="dynamic")
     @property
     def password(self):
         """Defines a write only class property password"""
@@ -46,7 +46,7 @@ class Pitch(db.Model):
     __tablename__ = "pitches"
     id = id = db.Column(db.Integer,primary_key = True)
     # pitch_category
-    user_pitch = db.Column(db.String(200))
+    user_pitch = db.Column(db.String(800))
     time_posted = db.Column(db.DateTime,default=datetime.now)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     category_id = db.Column(db.Integer,db.ForeignKey("categories.id"))
@@ -90,7 +90,7 @@ class Comment(db.Model):
     """Class that defines a Pitch Model and creates new pitches."""
     __tablename__ = "comments"
     id = id = db.Column(db.Integer,primary_key = True)
-    comment = db.Column(db.String(255))
+    comment = db.Column(db.String)
     time_posted = db.Column(db.DateTime,default=datetime.now)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"))
